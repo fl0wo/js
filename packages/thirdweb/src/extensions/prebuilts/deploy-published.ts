@@ -127,7 +127,6 @@ export type DeployContractfromDeployMetadataOptions = {
   initializeParams?: Record<string, unknown>;
   initializeData?: `0x${string}`;
   implementationConstructorParams?: Record<string, unknown>;
-  isSuperchainInterop?: boolean;
   isCrosschain?: boolean;
   modules?: {
     deployMetadata: FetchDeployMetadataResult;

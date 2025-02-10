@@ -28,29 +28,16 @@ import {
 import Link from "next/link";
 import { useCallback, useMemo } from "react";
 import { FormProvider, type UseFormReturn, useForm } from "react-hook-form";
-import {
-  ZERO_ADDRESS,
-  eth_getTransactionCount,
-  getContract,
-  getRpcClient,
-  sendTransaction,
-  waitForReceipt,
-} from "thirdweb";
+import { ZERO_ADDRESS, getContract } from "thirdweb";
 import type { FetchDeployMetadataResult } from "thirdweb/contract";
 import {
   deployContractfromDeployMetadata,
   deployMarketplaceContract,
   getRequiredTransactions,
 } from "thirdweb/deploys";
-import { installPublishedModule } from "thirdweb/modules";
 import { useActiveAccount, useActiveWalletChain } from "thirdweb/react";
 import { upload } from "thirdweb/storage";
-import {
-  type AbiFunction,
-  concatHex,
-  encodeAbiParameters,
-  padHex,
-} from "thirdweb/utils";
+import {} from "thirdweb/utils";
 import { isZkSyncChain } from "thirdweb/utils";
 import { FormHelperText, FormLabel, Text } from "tw-components";
 import { useCustomFactoryAbi, useFunctionParamsFromABI } from "../hooks";
@@ -203,10 +190,6 @@ export const CustomContractForm: React.FC<CustomContractFormProps> = ({
   const isAccountFactory =
     !isFactoryDeployment &&
     (metadata?.name.includes("AccountFactory") || false);
-
-  const isSuperchainInterop = !!modules?.find(
-    (m) => m.name === "SuperChainInterop",
-  );
 
   const parsedDeployParams = useMemo(
     () => ({
@@ -482,20 +465,15 @@ export const CustomContractForm: React.FC<CustomContractFormProps> = ({
         _contractURI,
       };
 
-      const salt = isSuperchainInterop
-        ? concatHex(["0x0101", padHex("0x", { size: 30 })]).toString()
-        : params.deployDeterministic
-          ? params.signerAsSalt
-            ? activeAccount.address.concat(params.saltForCreate2)
-            : params.saltForCreate2
-          : undefined;
+      const salt = params.deployDeterministic
+        ? params.signerAsSalt
+          ? activeAccount.address.concat(params.saltForCreate2)
+          : params.saltForCreate2
+        : undefined;
 
       const moduleDeployData = modules?.map((m) => ({
         deployMetadata: m,
-        initializeParams:
-          m.name === "SuperChainInterop"
-            ? { superchainBridge: "0x4200000000000000000000000000000000000028" }
-            : params.moduleData[m.name],
+        initializeParams: params.moduleData[m.name],
       }));
 
       const coreContractAddress = await deployContractfromDeployMetadata({
@@ -506,69 +484,8 @@ export const CustomContractForm: React.FC<CustomContractFormProps> = ({
         initializeParams,
         implementationConstructorParams,
         salt,
-        isSuperchainInterop,
-        modules: isSuperchainInterop
-          ? // remove modules for superchain interop in order to deploy deterministically deploy just the core contract
-            []
-          : moduleDeployData,
+        modules: moduleDeployData,
       });
-      const coreContract = getContract({
-        client: thirdwebClient,
-        address: coreContractAddress,
-        chain: walletChain,
-      });
-
-      if (isSuperchainInterop && moduleDeployData) {
-        const rpcRequest = getRpcClient({
-          client: thirdwebClient,
-          chain: walletChain,
-        });
-        const currentNonce = await eth_getTransactionCount(rpcRequest, {
-          address: activeAccount.address as `0x${string}`,
-        });
-
-        for (const [i, m] of moduleDeployData.entries()) {
-          let moduleData: `0x${string}` | undefined;
-
-          const moduleInstallParams = m.deployMetadata.abi.find(
-            (abiType) =>
-              (abiType as AbiFunction).name === "encodeBytesOnInstall",
-          ) as AbiFunction | undefined;
-
-          if (m.initializeParams && moduleInstallParams) {
-            moduleData = encodeAbiParameters(
-              (
-                moduleInstallParams.inputs as { name: string; type: string }[]
-              ).map((p) => ({
-                name: p.name,
-                type: p.type,
-              })),
-              Object.values(m.initializeParams),
-            );
-          }
-
-          console.log("nonce used: ", currentNonce + i);
-
-          const installTransaction = installPublishedModule({
-            contract: coreContract,
-            account: activeAccount,
-            moduleName: m.deployMetadata.name,
-            publisher: m.deployMetadata.publisher,
-            version: m.deployMetadata.version,
-            moduleData,
-            nonce: currentNonce + i,
-          });
-
-          const txResult = await sendTransaction({
-            transaction: installTransaction,
-            account: activeAccount,
-          });
-
-          await waitForReceipt(txResult);
-          // can't handle parallel transactions, so wait a bit
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-        }
-      }
 
       return coreContractAddress;
     },
@@ -899,10 +816,7 @@ export const CustomContractForm: React.FC<CustomContractFormProps> = ({
               {isModular && modules && modules.length > 0 && (
                 <ModularContractDefaultModulesFieldset
                   form={form}
-                  modules={modules.filter(
-                    // superchain interop will have a default value for it's install param
-                    (mod) => mod.name !== "SuperChainInterop",
-                  )}
+                  modules={modules}
                   isTWPublisher={isTWPublisher}
                 />
               )}
