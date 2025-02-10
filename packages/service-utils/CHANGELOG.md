@@ -1,5 +1,41 @@
 # @thirdweb-dev/service-utils
 
+## 0.8.7
+
+### Patch Changes
+
+- [#6206](https://github.com/thirdweb-dev/js/pull/6206) [`8aeb4d6`](https://github.com/thirdweb-dev/js/commit/8aeb4d6308a2624a3e483aa4da408bbbdc8da688) Thanks [@arcoraven](https://github.com/arcoraven)! - Export usageV2 sources
+
+## 0.8.6
+
+### Patch Changes
+
+- [#6172](https://github.com/thirdweb-dev/js/pull/6172) [`a8ac98b`](https://github.com/thirdweb-dev/js/commit/a8ac98bd493d1d6e824aad868dea1ec42ff22768) Thanks [@catalyst17](https://github.com/catalyst17)! - add `canCreatePublicChains` to TeamResponse
+
+- [#6183](https://github.com/thirdweb-dev/js/pull/6183) [`18f0e57`](https://github.com/thirdweb-dev/js/commit/18f0e575c4a9764b3192931451cbd3f632a21e3c) Thanks [@arcoraven](https://github.com/arcoraven)! - [service-utils] Update list of usageV2 sources"
+
+## 0.8.5
+
+### Patch Changes
+
+- [#6171](https://github.com/thirdweb-dev/js/pull/6171) [`ee6bd4f`](https://github.com/thirdweb-dev/js/commit/ee6bd4f8982d2b0db823c8cb472aeb9d6f9408fb) Thanks [@arcoraven](https://github.com/arcoraven)! - [service-utils] export KafkaProducer
+
+- [#6181](https://github.com/thirdweb-dev/js/pull/6181) [`dfd64d2`](https://github.com/thirdweb-dev/js/commit/dfd64d2896444b223cbe999c7973ed1287cd833e) Thanks [@arcoraven](https://github.com/arcoraven)! - [service-utils] Expose maxInFlightRequests in Kafka producer
+
+- [#6164](https://github.com/thirdweb-dev/js/pull/6164) [`821caa6`](https://github.com/thirdweb-dev/js/commit/821caa63d78a2f985925d6c1be24143f46f435f4) Thanks [@arcoraven](https://github.com/arcoraven)! - [service-utils] fix: Add missing CompressionCodecs import
+
+- [#6170](https://github.com/thirdweb-dev/js/pull/6170) [`ccf6329`](https://github.com/thirdweb-dev/js/commit/ccf6329810c1426fadc4483660e154ae38a2927b) Thanks [@arcoraven](https://github.com/arcoraven)! - Add raw kafka producer
+
+## 0.8.4
+
+### Patch Changes
+
+- [#6137](https://github.com/thirdweb-dev/js/pull/6137) [`a6b7e8d`](https://github.com/thirdweb-dev/js/commit/a6b7e8d81868b5f32f1c8b7ff093bb1f06c734ca) Thanks [@jnsdls](https://github.com/jnsdls)! - updated dependencies
+
+- [#6139](https://github.com/thirdweb-dev/js/pull/6139) [`f4f93e6`](https://github.com/thirdweb-dev/js/commit/f4f93e6353d3951c580df25b757b1ac20fdcf763) Thanks [@arcoraven](https://github.com/arcoraven)! - [service-utils] Update to ESM for compression typrse
+
+- [#6131](https://github.com/thirdweb-dev/js/pull/6131) [`a76e653`](https://github.com/thirdweb-dev/js/commit/a76e6534c49480f30ec1fd1e404f76d04947cd49) Thanks [@arcoraven](https://github.com/arcoraven)! - [service-utils] switch to lz4js for compression lib
+
 ## 0.8.3
 
 ### Patch Changes
