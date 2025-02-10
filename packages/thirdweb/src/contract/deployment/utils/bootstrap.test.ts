@@ -40,7 +40,7 @@ describe.runIf(process.env.TW_SECRET_KEY)("bootstrap", () => {
     const cloneFactory = await getDeployedInfraContract({
       chain: ANVIL_CHAIN,
       client: TEST_CLIENT,
-      contractId: "TWCloneFactory",
+      contractId: "TWCloneFactoryV2",
       constructorParams: {
         _trustedForwarder: forwarder.address,
       },

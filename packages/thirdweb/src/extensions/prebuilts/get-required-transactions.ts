@@ -76,7 +76,7 @@ export async function getRequiredTransactions(
         : getDeployedInfraContract({
             chain,
             client,
-            contractId: "TWCloneFactory",
+            contractId: "TWCloneFactoryV2",
             constructorParams: {
               _trustedForwarder: await computePublishedContractAddress({
                 chain,
@@ -87,7 +87,7 @@ export async function getRequiredTransactions(
           }).then((c) =>
             c
               ? null
-              : ({ type: "infra", contractId: "TWCloneFactory" } as const),
+              : ({ type: "infra", contractId: "TWCloneFactoryV2" } as const),
           ),
       // TODO (deploy): add WETH contract check for implementations that need it (check implementation constructor params)
       getTransactionsForImplementation({

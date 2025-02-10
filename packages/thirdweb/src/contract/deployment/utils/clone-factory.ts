@@ -21,9 +21,8 @@ export async function getDeployedCloneFactoryContract(args: ClientAndChain) {
   // check if clone factory is deployed
   const cloneFactory = await getDeployedInfraContract({
     ...args,
-    contractId: "TWCloneFactory",
+    contractId: "TWCloneFactoryV2",
     constructorParams: { _trustedForwarder: forwarder.address },
-    publisher: "0x6453a486d52e0EB6E79Ec4491038E2522a926936", // TODO: use default publisher
   });
   if (!cloneFactory) {
     return null;
