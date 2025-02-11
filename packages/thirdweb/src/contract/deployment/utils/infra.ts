@@ -15,7 +15,7 @@ export type InfraContractId =
   | "WETH9"
   | "Forwarder"
   | "ForwarderEOAOnly"
-  | "TWCloneFactoryV2"
+  | "TWCloneFactory"
   | (string & {});
 
 type GetDeployedInfraParams = Prettify<

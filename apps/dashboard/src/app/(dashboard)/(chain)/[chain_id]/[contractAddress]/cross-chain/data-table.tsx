@@ -25,7 +25,6 @@ import {
   DeployStatusModal,
   useDeployStatusModal,
 } from "components/contract-components/contract-deploy-form/deploy-context-modal";
-import {} from "components/contract-components/contract-deploy-form/modular-contract-default-modules-fieldset";
 import { useTxNotifications } from "hooks/useTxNotifications";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";

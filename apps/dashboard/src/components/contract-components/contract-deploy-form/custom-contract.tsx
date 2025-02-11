@@ -37,7 +37,6 @@ import {
 } from "thirdweb/deploys";
 import { useActiveAccount, useActiveWalletChain } from "thirdweb/react";
 import { upload } from "thirdweb/storage";
-import {} from "thirdweb/utils";
 import { isZkSyncChain } from "thirdweb/utils";
 import { FormHelperText, FormLabel, Text } from "tw-components";
 import { useCustomFactoryAbi, useFunctionParamsFromABI } from "../hooks";

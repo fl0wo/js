@@ -165,7 +165,7 @@ export async function deployCloneFactory(options: ClientAndChainAndAccount) {
   // clone factory
   return getOrDeployInfraContract({
     ...options,
-    contractId: "TWCloneFactoryV2",
+    contractId: "TWCloneFactory",
     constructorParams: { _trustedForwarder: forwarder.address },
   });
 }
