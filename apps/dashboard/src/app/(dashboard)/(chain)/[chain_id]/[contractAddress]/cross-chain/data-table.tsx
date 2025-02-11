@@ -201,7 +201,7 @@ export function DataTable({
       const chain = defineChain(chainId);
       const client = getThirdwebClient();
       const salt =
-        inputSalt || concatHex(["0x07", padHex("0x", { size: 31 })]).toString();
+        inputSalt || concatHex(["0x03", padHex("0x", { size: 31 })]).toString();
 
       await switchChain(chain);
 
