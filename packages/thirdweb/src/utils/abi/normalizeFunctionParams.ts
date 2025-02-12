@@ -14,6 +14,7 @@ export function normalizeFunctionParams(
     abiFunction.inputs.map((input, index) => {
       const value = input.name;
       if (value === undefined || value.length === 0) {
+        // TODO: Handle multiple unnamed params
         if (!params["*"]) {
           throw new Error(
             `Missing named parameter for ${"name" in abiFunction ? abiFunction.name : "constructor"} at index ${index}`,
