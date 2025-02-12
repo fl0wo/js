@@ -88,10 +88,10 @@ describe("normalizeFunctionParams", () => {
       outputs: [],
     };
 
-    const normalied = normalizeFunctionParams(abiFunction, { "*": 123 });
+    const normalized = normalizeFunctionParams(abiFunction, { "*": 123 });
 
-    expect(normalied.length).to.eq(1);
-    expect(normalied[0]).to.eq(123);
+    expect(normalized.length).to.eq(1);
+    expect(normalized[0]).to.eq(123);
   });
 
   it("should throw an error if a parameter value is missing", () => {
